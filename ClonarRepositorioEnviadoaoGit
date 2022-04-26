@@ -1,0 +1,33 @@
+https://docs.github.com/pt/get-started/importing-your-projects-to-github/importing-source-code-to-github/importing-a-git-repository-using-the-command-line
+
+1 - Crie um novo repositório em GitHub. Você importará o repositório Git externo (o que deve ser clonado) para este novo repositório.
+    - Copie e guarde o endereço de seu repositório. Você vai usá-lo bastante. O endereço começa por http:// ...
+
+2 - Na linha de comando, faça um clone do repositório externo usando a URL clone externo. Isso criará uma cópia integral dos dados, mas sem um diretório de trabalho para editar arquivos, e garantirá uma exportação limpa e recente de todos os dados antigos.
+    -  git clone --bare https://github.com/eajardini/gapSistemaExemplo.git
+
+3 - Faça o push do repositório clonado localmente em GitHub usando a opção "mirror" (espelho), que assegura que todas as referências, como branches e tags, são copiadas para o repositório importado.
+    - cd repo.git
+    - git push --mirror https://github.com/usuarioQueClonou/repo.git
+        - Este comando indicará um erro devido à necessidade do uso de token. Para criar o token, siga as instruções do endereço https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+            - No perfil do usuário  usuarioQueClonou, selecione o menu Settings -> Developer settings -> Personal access tokens.
+            - Clique em Generate New Token. Atenção: O token criado será usado como uma senha para salvar em seus repositórios. Guarde ele bem. Se você esquecer, o Github tem estrições para ficar criando novos tokens a toda hora.
+            - No campo Note, coloque uma descrição para seu token. Exemplo: token da Disciplina GAP
+            - No campo Expiration, coloque a opção No Expiration
+            - Selecione as opções que contenham a palavra repo.
+            - Pronto, agora você pode dar o comando git push novamente e coloque o token criado como sua senha.
+
+4 - Remova o repositório local temporário.
+    - cd ..
+    - rm -rf repo.git
+
+5 - Agora é clonar e começar a trabalhar em cima do código.
+    - git clone https://github.com/EvandroJardiniTeste/gapSistemaExemploClonado.git
+
+6 - Para enviar uma mudança ao repositório
+    - Faça as alterações desejadas nos arquivos e dê os seguintes comandos:
+        - git add .
+        - git commit -m "coloque alguma informação"
+        - git branch -M main
+        - git remote add origin https://github.com/EvandroJardiniTeste/gapSistemaExemploClonado.git
+        - git push -u origin main
